@@ -1,0 +1,12 @@
+<h1>Welcome to Web Album</h1>
+<% @all_groups.each do |album| %>
+<p><%= album.description %>
+<%= ' managed by '%>
+<%= album.name %></p>
+<% end %>
+<form action='/' method='POST'>
+  <strong>Add a new group:</strong>
+  <input type='text' name='group' placeholder='group name' />
+  <input type='text' name='name' placeholder='manager name' />
+  <input type='submit' value='Save'>
+</form>
