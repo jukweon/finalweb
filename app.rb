@@ -20,11 +20,16 @@ end
 
 # define a route for the root of the site
 get '/' do
-  @all_groups = Group.all
+  @all_groups = Group.all.order(:name)
   erb :index
 end
 
-post '/'do
+post '/' do
   Group.create(description: params[:group], name: params[:name])
+  redirect '/'
+end
+
+delete '/:id' do
+  Group.find_by(params[:id]).destroy
   redirect '/'
 end
