@@ -11,11 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126100734) do
+ActiveRecord::Schema.define(version: 20141128065449) do
 
-  create_table "groups", force: true do |t|
-    t.string "description"
+  create_table "albums", force: true do |t|
     t.string "name"
+  end
+
+  create_table "photos", force: true do |t|
+    t.integer "album_id"
+    t.string  "picture"
+    t.string  "description"
+    t.string  "date"
   end
 
 end

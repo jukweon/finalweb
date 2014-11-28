@@ -1,0 +1,18 @@
+<h1>Welcome to Web Album</h1>
+<% @all_photos.each do |photo| %>
+<p>
+  <img src = '<%= photo.picture %>' />
+  <%= 'The story about this picture: '%>
+  <%= photo.description %>
+  <%= 'This photo is taken on: '%>
+  <%= photo.date %>
+  </p>
+<% end %>
+<form action='/<%= @album.name%>' method='POST'>
+  <strong>Add a new photo:</strong>
+  <input type='text' name='picture' placeholder='Write down the URL.' />
+  <input type='text' name='description' placeholder='Describe the photo.' />
+  <input type='text' name='date' placeholder='When was it taken?' />
+  <input type='submit' value='Save'>
+</form>
+<a href= '/'> Click: Going back to album lists! </a>

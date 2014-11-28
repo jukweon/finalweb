@@ -6,7 +6,8 @@ require 'bundler/setup'
 # load all of the gems in the gemfile
 Bundler.require
 
-require './models/Group'
+require './models/Photo'
+require './models/Album'
 
 if ENV['DATABASE_URL']
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
@@ -19,17 +20,25 @@ else
 end
 
 # define a route for the root of the site
+
 get '/' do
-  @all_groups = Group.all.order(:name)
-  erb :index
+  @all_albums = Album.all.order(:name)
+  erb :album_list
 end
 
 post '/' do
-  Group.create(description: params[:group], name: params[:name])
+  @album = Album.create(name: params[:name])
   redirect '/'
 end
 
-delete '/:id' do
-  Group.find_by(params[:id]).destroy
-  redirect '/'
+get '/:album_id' do
+  @album = Album.find(params[:album_id])
+  @all_photos = @album.all_photos.order(:date)
+  erb :photo_list
+end
+
+post '/:album_id' do
+  @album= Album.find(params[:album_id])
+  Photo.create(album: @album, picture: params[:picture], description: params[:description], date: params[:date])
+  redirect "/#{params[:album_id]}"
 end
