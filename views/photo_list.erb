@@ -1,6 +1,9 @@
 <h1>Welcome to Web Album</h1>
 <% @all_photos.each do |photo| %>
 <p>
+  <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
+    <input type='submit' value='Delete' />
+  </form>
   <img src = '<%= photo.picture %>' />
   <%= 'The story about this picture: '%>
   <%= photo.description %>
@@ -13,6 +16,6 @@
   <input type='text' name='picture' placeholder='Write down the URL.' />
   <input type='text' name='description' placeholder='Describe the photo.' />
   <input type='text' name='date' placeholder='When was it taken?' />
-  <input type='submit' value='Save'>
+  <input type='submit' value='Save'/>
 </form>
 <a href= '/'> Click: Going back to album lists! </a>

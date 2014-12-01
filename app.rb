@@ -41,3 +41,13 @@ post '/:album/new_photo' do
   Album.find(params[:album]).photos.create(picture: params[:picture], description: params[:description], date: params[:date])
   redirect "/#{params[:album]}"
 end
+
+get '/delete/:album' do
+  Album.find(params[:album]).destroy
+  redirect '/'
+end
+
+get '/:album/delete/:photo' do
+  Photo.find(params[:photo]).destroy
+  redirect "/#{params[:album]}"
+end
