@@ -26,19 +26,18 @@ get '/' do
   erb :album_list
 end
 
-post '/' do
-  @album = Album.create(name: params[:name])
-  redirect '/'
-end
-
-get '/:album_id' do
-  @album = Album.find(params[:album_id])
-  @all_photos = @album.all_photos.order(:date)
+get '/:album' do
+  @album = Album.find(params[:album])
+  @all_photos = @album.photos.order(:date)
   erb :photo_list
 end
 
-post '/:album_id' do
-  @album= Album.find(params[:album_id])
-  Photo.create(album: @album, picture: params[:picture], description: params[:description], date: params[:date])
-  redirect "/#{params[:album_id]}"
+post '/new_album' do
+  @album = Album.create(params)
+  redirect '/'
+end
+
+post '/:album/new_photo' do
+  Album.find(params[:album]).photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  redirect "/#{params[:album]}"
 end

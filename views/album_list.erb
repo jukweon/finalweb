@@ -1,10 +1,10 @@
 <h1>Here are the lists of albums!</h1>
 <% @all_albums.each do |album| %>
 <p>
-  <a href= '/<%= album.name %>'> <%= album.name %> </a>
+  <a href= '/<%= album.id %>'> <%= album.name %> </a>
 </p>
 <% end %>
-<form action='/' method='POST'>
+<form action='/new_album' method='POST'>
   <strong>Add a new album:</strong>
   <input type='text' name='name' placeholder='Name of the album.' />
   <input type='submit' value='Save'>

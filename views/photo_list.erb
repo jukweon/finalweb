@@ -8,7 +8,7 @@
   <%= photo.date %>
   </p>
 <% end %>
-<form action='/<%= @album.name%>' method='POST'>
+<form action='/<%= @album.id %>/new_photo' method='POST'>
   <strong>Add a new photo:</strong>
   <input type='text' name='picture' placeholder='Write down the URL.' />
   <input type='text' name='description' placeholder='Describe the photo.' />
