@@ -3,11 +3,15 @@
 <p>
   <img src = '<%= album.picture %>' />
   <a href= '/<%= album.id %>'> <%= album.name %></a>
-  <form action= '/share' style='display:inline'>
+
+  <form action='/share' method='POST'>
     <strong>Who do you want to share your album?:</strong>
-    <input type='text' name='username' placeholder='username' />
-    <input type= 'submit' value='Share' />
+    <div class="form-group">
+      <input class="form-control" type='text' name='username' placeholder='username' />
+      <input type= 'submit' value='Share' />
+    </div>
   </form>
+
   <form action= '/delete/<%= album.id %>' style='display:inline'>
     <input type= 'submit' value='Delete' />
   </form>
