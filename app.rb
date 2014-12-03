@@ -69,25 +69,50 @@ end
 
 post '/new_album' do
   #@user = User.find(params[:user])
-  @user.albums.create(name: params[:name])
+  @user.albums.create(params)
   redirect '/'
 end
 
 get '/delete/:album' do
   @album = Album.find(params[:album])
-  @user = @album.user
+  #@user = @album.user
   @album.destroy
+  redirect '/'
+end
+
+post '/share' do
+  user = User.find_by(name: params[:username])
+  if user.nil?
+    @message = "User not found."
+    erb :message_page
+  else
+    @message = "YAY"
+    erb :message_page
+  end
   redirect '/'
 end
 
 get '/:album' do
   @album = Album.find(params[:album])
-  @user = @album.user
+  #@user = @album.user
   @all_photos = @album.photos.order(:date)
   erb :photo_list
 end
 
-#post '/new_photo' do
+#post '/:album/new_photo' do
+  #Album.find(params[:album]).photos.create
+  #@album = Album.find(params[:album])
+  #@album.photos.create(params)
+  ##"Hello World"
+  ##@album = Album.find(params[:album])
+  ##@user = @album.user
+  ##@album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  #redirect "/"
+#end
+
+#post '/:album/new_photo' do
+  #Album.find(params[:album]).photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  #@album = Album.find(params[:album])
   #@user = @album.user
   #@album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
   #redirect "/"

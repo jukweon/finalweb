@@ -1,15 +1,22 @@
 <h1><%= @user.name %>'s albums!</h1>
 <% @all_albums.each do |album| %>
 <p>
+  <img src = '<%= album.picture %>' />
+  <a href= '/<%= album.id %>'> <%= album.name %></a>
+  <form action= '/share' style='display:inline'>
+    <strong>Who do you want to share your album?:</strong>
+    <input type='text' name='username' placeholder='username' />
+    <input type= 'submit' value='Share' />
+  </form>
   <form action= '/delete/<%= album.id %>' style='display:inline'>
     <input type= 'submit' value='Delete' />
   </form>
-  <a href= '/<%= album.id %>'> <%= album.name %> </a>
 </p>
 <% end %>
 <form action="/new_album" method='POST'>
   <strong>Add a new album:</strong>
   <input type='text' name='name' placeholder='album name' />
+  <input type='text' name='picture' placeholder='profile picture' />
   <input type='submit' value='Save'/>
 </form>
 
