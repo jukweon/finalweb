@@ -4,36 +4,15 @@
   <form action= '/delete/<%= album.id %>' style='display:inline'>
     <input type= 'submit' value='Delete' />
   </form>
-  <% unless album.name? %>
+  <a href= '/<%= album.id %>'> <%= album.name %> </a>
 </p>
-<% end %>
 <% end %>
 <form action="/new_album" method='POST'>
   <strong>Add a new album:</strong>
-  <input type='text' name='name' placeholder='Name of the album.' />
+  <input type='text' name='name' placeholder='album name' />
   <input type='submit' value='Save'/>
 </form>
 
-<h1><%= @user.name %>'s albums!</h1>
-<div class="list-group">
-  <% @all_albums.each do |album| %>
-  <div class="list-group-item">
-    <a href='/delete/<%= album.id %>' class="btn btn-sm btn-default complete"><span class="glyphicon glyphicon-ok"> </span></a>
-    <%= album.name %>
-  </div>
-  <% end %>
-</div>
-<div class="panel">
-  <div class="panel-body">
-    <h4 class="list-group-item-heading">New Album:</h4>
-    <form class="form-inline" action='/new_album' method='POST'>
-      <div class="form-group">
-        <input class="form-control" type='text' name='name' placeholder='album name' />
-      </div>
-      <button type='submit' class="btn btn-primary">Save</button>
-    </form>
-  </div>
-</div>
 <p>
   <a href="/logout" class="btn btn-default">logout</a>
   <a href="/delete_user" class="btn btn-danger">delete my account</a>
