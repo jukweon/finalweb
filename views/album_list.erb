@@ -1,30 +1,53 @@
 <h1><%= @user.name %>'s albums!</h1>
+
+
+<div id="background">
+  <img src="abc.jpg" class="stretch" />
+</div>
+
 <% @all_albums.each do |album| %>
 <p>
-  <img src = '<%= album.picture %>' />
-  <a href= '/<%= album.id %>'> <%= album.name %></a>
-
-  <form action='/share' method='POST'>
-    <strong>Who do you want to share your album?:</strong>
+  <form class="form-inline" role="form">
     <div class="form-group">
-      <input class="form-control" type='text' name='username' placeholder='username' />
-      <input type= 'submit' value='Share' />
+
+      <div class="container1">
+        <a href="/<%= album.id %>"><img src='<%= album.picture %>'></a>
+      </div>
+
+      <div class="input-group">
+        <form action= '/share' style='display:inline'>
+          <input class= "col-xs-7"type='text' name='username' placeholder='username' />
+        </form>
+      </div>
+
+      <button type="submit" class="btn btn-success">Share</button>
+      <form action= '/delete/<%= album.id %>' style='display:inline'>
+        <button type= 'submit' class="btn btn-danger">Delete </button>
+      </form>
     </div>
   </form>
 
-  <form action= '/delete/<%= album.id %>' style='display:inline'>
-    <input type= 'submit' value='Delete' />
-  </form>
 </p>
+
 <% end %>
-<form action="/new_album" method='POST'>
-  <strong>Add a new album:</strong>
-  <input type='text' name='name' placeholder='album name' />
-  <input type='text' name='picture' placeholder='profile picture' />
-  <input type='submit' value='Save'/>
-</form>
+
+<div class="panel">
+  <div class="panel-body">
+    <form class="addphotoform" action="/new_album" method='POST' style='center'>
+      <h4 class="list-group-item-heading">Add a new album:</h4>
+      <div class="form-group">
+        <input class="form-control" type='text' name='name' placeholder='album name' />
+      </div>
+      <div class="form-group">
+        <input class="form-control" type='text' name='picture' placeholder='profile picture' />
+      </div>
+      <button type='submit' class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>
 
 <p>
   <a href="/logout" class="btn btn-default">logout</a>
+  <a href="/backgrounda" class="btn btn-success">To change background</a>
   <a href="/delete_user" class="btn btn-danger">delete my account</a>
 </p>

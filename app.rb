@@ -68,12 +68,14 @@ get '/delete_user' do
 end
 
 post '/new_album' do
+  #@user = User.find(params[:user])
   @user.albums.create(params)
   redirect '/'
 end
 
 get '/delete/:album' do
   @album = Album.find(params[:album])
+  #@user = @album.user
   @album.destroy
   redirect '/'
 end
@@ -93,29 +95,33 @@ end
 get '/:album' do
   @album = Album.find(params[:album])
   @all_photos = @album.photos.order(:date)
+  @background = @album.background
   erb :photo_list
 end
 
 
-post '/new_background' do
-  backa = Album.find_by(back_album: params[:back_album])
-
-
-
-  erb :background
+get '/:album/upload_background' do
+  @album = Album.find(params[:album])
+  erb :upload_background
 end
 
+post '/:album/upload_background' do
+  @album = Album.find(params[:album])
+  @background = Background.find(params[:background])
+  redirect "/#{params[:album]}"
+end
 
 post '/:album/new_photo' do
   @album = Album.find(params[:album])
   @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
-  redirect '/'
+  redirect "/#{params[:album]}"
 end
 
-get '/delete/:photo' do
+get '/:album/delete/:photo' do
+  @album = Album.find(params[:album])
   @photo = Photo.find(params[:photo])
   #@album = @photo.album
   #@user = @album.user
   @photo.destroy
-  redirect "/"
+  redirect "/#{params[:album]}"
 end

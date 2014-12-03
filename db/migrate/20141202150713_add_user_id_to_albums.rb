@@ -1,4 +1,4 @@
-class AddUseridsToAlbums < ActiveRecord::Migration
+class AddUserIdToAlbums < ActiveRecord::Migration
   def change
     change_table :albums do |t|
       t.integer :user_id

@@ -1,4 +1,11 @@
-<h1><%= @album.name %> Album</h1>
+<div id="background">
+  <img src="<%= @background.id %>" class="stretch" />
+</div>
+
+<h1> Album: <%= @album.name %></h1>
+
+<a href= '/<%= @album.id %>/upload_background'> Upload background </a>
+
 <% @all_photos.each do |photo| %>
 <p>
   <img src = '<%= photo.picture %>' />
@@ -6,17 +13,38 @@
   <%= photo.description %>
   <%= 'This photo is taken on:'%>
   <%= photo.date %>
+  <form action= '/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
+    <button type= 'submit' class="btn btn-danger">Delete </button>
+  </form>
 </p>
 <% end %>
 
-<form action='/new_photo' method='POST'>
-  <strong>Add a new photo:</strong>
-  <input type='text' name='picture' placeholder='Write down the URL.' />
-  <input type='text' name='description' placeholder='Describe the photo.' />
-  <input type='text' name='date' placeholder='When was it taken?' />
-  <input type='submit' value='Save'/>
-</form>
+<div class="panel">
+  <div class="panel-body">
+    <form class="addphotoform" action="/<%= @album.id %>/new_photo" method='POST' style='center'>
+      <h4 class="list-group-item-heading">Add a new photo:</h4>
+
+      <div class="form-group">
+        <input class="form-control" type='text' name='picture' placeholder='Write down the URL.' />
+      </div>
+      <div class="form-group">
+        <input class="form-control" type='text' name='description' placeholder='Describe the photo.' />
+      </div>
+      <div class="form-group">
+        <input class="form-control" type='text' name='date' placeholder='When was it taken?' />
+      </div>
+
+
+      <form action= '/new_photo' style='display:inline'>
+        <button type='submit' class="btn btn-primary">Save</button>
+      </form>
+
+    </form>
+  </div>
+</div>
+
 <p>
   <a href="/logout" class="btn btn-default">logout</a>
-  <a href= "/"> Click: Going back to album lists! </a>
+  <a href="/" class="btn btn-warning">To change the background</a>
+  <a href="/" class="btn btn-danger">Click: Going back to album lists!</a>
 </p>
