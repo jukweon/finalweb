@@ -5,6 +5,7 @@ Bundler.require
 
 require './models/Album'
 require './models/User'
+require './models/Photo'
 
 enable :sessions
 
@@ -73,17 +74,24 @@ post '/new_album' do
 end
 
 get '/delete/:album' do
-  @album = Album.find_by(params[:album])
+  @album = Album.find(params[:album])
   @user = @album.user
   @album.destroy
   redirect '/'
 end
 
-get ':album/photo_lists' do
-  @album = Album.find_by(name: params[:name])
+get '/:album' do
+  @album = Album.find_by(params[:album])
+  @user = @album.user
   @all_photos = @album.photos.order(:date)
   erb :photo_list
 end
+
+#get '/photo_lists' do
+  ##@album = Album.find_by(name: params[:name])
+  #@all_photos = @album.photos.order(:date)
+  #erb :photo_list
+#end
 
 post '/new_photo' do
   @user = @album.user
@@ -98,50 +106,3 @@ get '/delete/:photo' do
   @photo.destroy
   redirect "/"
 end
-
-#post '/:user/new_album' do
-  #User.find(params[:user]).albums.create(params)
-  ##@album = Album.create(params)
-  #redirect "/#{params[:user]}"
-#end
-
-#get '/:user/delete/:album' do
-  #Album.find(params[:album]).destroy
-  #redirect '/album_lists'
-#end
-
-
-#get '/' do
-  #@all_users = User.all.order(:name)
-  #erb :log_in
-#end
-
-#get '/album_lists' do
-  #redirect '/' unless @user
-  #get '/:user' do
-  #@user = User.find_by(name: session[:name])
-  #@all_albums = @user.albums.order(:name)
-  #erb :album_list
-#end
-
-#post '/:user/new_album' do
-  #User.find(params[:user]).albums.create(params)
-  ##@album = Album.create(params)
-  #redirect "/#{params[:user]}"
-#end
-
-#get '/:album' do
-  #@album = Album.find(params[:album])
-  #@all_photos = @album.photos.order(:date)
-  #erb :photo_list
-#end
-
-#post '/:album/new_photo' do
-  #Album.find(params[:album]).photos.create(picture: params[:picture], description: params[:description], date: params[:date])
-  #redirect "/#{params[:album]}"
-#end
-
-#get '/:album/delete/:photo' do
-  #Photo.find(params[:photo]).destroy
-  #redirect "/#{params[:album]}"
-#end
