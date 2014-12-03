@@ -81,28 +81,22 @@ get '/delete/:album' do
 end
 
 get '/:album' do
-  @album = Album.find_by(params[:album])
+  @album = Album.find(params[:album])
   @user = @album.user
   @all_photos = @album.photos.order(:date)
   erb :photo_list
 end
 
-#get '/photo_lists' do
-  ##@album = Album.find_by(name: params[:name])
-  #@all_photos = @album.photos.order(:date)
-  #erb :photo_list
+#post '/new_photo' do
+  #@user = @album.user
+  #@album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  #redirect "/"
 #end
 
-post '/new_photo' do
-  @user = @album.user
-  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
-  redirect "/"
-end
-
-get '/delete/:photo' do
-  @photo = Photo.find_by(params[:photo])
-  @album = @photo.album
-  @user = @album.user
-  @photo.destroy
-  redirect "/"
-end
+#get '/delete/:photo' do
+  #@photo = Photo.find_by(params[:photo])
+  #@album = @photo.album
+  #@user = @album.user
+  #@photo.destroy
+  #redirect "/"
+#end
