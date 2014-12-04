@@ -1,4 +1,3 @@
-# db/migrate/20141126184543_create_photos.rb
 class CreatePhotos < ActiveRecord::Migration
   def change
     create_table :photos do |t|

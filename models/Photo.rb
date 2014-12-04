@@ -1,3 +1,3 @@
 class Photo < ActiveRecord::Base
-  belongs_to :album, -> { includes :user }
+  belongs_to :album
 end

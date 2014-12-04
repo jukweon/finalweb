@@ -1,11 +1,5 @@
-<div id="background">
-  <img src="<%= @background.id %>" class="stretch" />
-</div>
-
 <h1> Album: <%= @album.name %></h1>
-
-<a href= '/<%= @album.id %>/upload_background'> Upload background </a>
-
+<!-- -->
 <% @all_photos.each do |photo| %>
 <p>
   <img src = '<%= photo.picture %>' />

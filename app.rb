@@ -95,21 +95,21 @@ end
 get '/:album' do
   @album = Album.find(params[:album])
   @all_photos = @album.photos.order(:date)
-  @background = @album.background
+  #@background = @album.background
   erb :photo_list
 end
 
 
-get '/:album/upload_background' do
-  @album = Album.find(params[:album])
-  erb :upload_background
-end
+#get '/:album/upload_background' do
+  #@album = Album.find(params[:album])
+  #erb :upload_background
+#end
 
-post '/:album/upload_background' do
-  @album = Album.find(params[:album])
-  @background = Background.find(params[:background])
-  redirect "/#{params[:album]}"
-end
+#post '/:album/upload_background' do
+  #@album = Album.find(params[:album])
+  #@background = Background.find(params[:background])
+  #redirect "/#{params[:album]}"
+#end
 
 post '/:album/new_photo' do
   @album = Album.find(params[:album])
