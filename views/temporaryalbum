@@ -1,0 +1,53 @@
+<h1><%= @user.name %>'s Album Lists</h1>
+
+<div id="background">
+  <img src="abc.jpg" class="stretch" />
+</div>
+
+<% @all_albums.each do |album| %>
+<p>
+  <form class="form-inline" role="form">
+    <div class="form-group">
+      <%= album.name %>
+      <div class="container1">
+        <a href="/<%= album.id %>"><img src='<%= album.picture %>'></a>
+      </div>
+      <%= 'Members:'%>
+      <% album.users.each do |user| %>
+      <%= user.name + ' '%>
+      <% end %>
+      <div class="input-group">
+        <form action="/new_album_member?id=<%= album.id %>" method="POST">
+          <% album_users = ''%>
+          <strong>Who do you want to share your album with?</strong>
+          <input type ='text' name='name' placeholder='usernames' value="<%= album_users%>" />
+          <input type= 'submit' value='Share' />
+        </form>
+      </div>
+      <form action= '/delete/<%= album.id %>' style='display:inline'>
+        <input type= 'submit' value='Delete' />
+      </form>
+    </div>
+  </form>
+</p>
+<% end %>
+
+<div class="panel">
+  <div class="panel-body">
+    <form class="addphotoform" action="/new_album" method='POST' style='center'>
+      <h4 class="list-group-item-heading">Add a new album:</h4>
+      <div class="form-group">
+        <input class="form-control" type='text' name='name' placeholder='album name' />
+      </div>
+      <div class="form-group">
+        <input class="form-control" type='text' name='picture' placeholder='profile picture' />
+      </div>
+      <button type='submit' class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>
+
+<p>
+<a href="/logout" class="btn btn-default">logout</a>
+<a href="/delete_user" class="btn btn-danger">delete my account</a>
+</p>

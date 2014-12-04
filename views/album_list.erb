@@ -1,20 +1,20 @@
 <h1><%= @user.name %>'s Album Lists</h1>
 <% @all_albums.each do |album| %>
-  <a href= '/<%= album.id %>'> <%= album.name %></a>
-  <img src = '<%= album.picture %>' />
-  <%= 'Members:'%>
-  <% album.users.each do |user| %>
-  <%= user.name + ' '%>
-  <% end %>
-  <form action="/new_album_member?id=<%= album.id %>" method="POST">
-    <% album_users = ''%>
-    <strong>Who do you want to share your album with?</strong>
-    <input type ='text' name='name' placeholder='usernames' value="<%= album_users%>" />
-    <input type= 'submit' value='Share' />
-  </form>
-  <form action= '/delete/<%= album.id %>' style='display:inline'>
-    <input type= 'submit' value='Delete' />
-  </form>
+<a href= '/<%= album.id %>'> <%= album.name %></a>
+<img src = '<%= album.picture %>' />
+<%= 'Members:'%>
+<% album.users.each do |user| %>
+<%= user.name + ' '%>
+<% end %>
+<form action="/new_album_member?id=<%= album.id %>" method="POST">
+  <% album_users = ''%>
+  <strong>Who do you want to share your album with?</strong>
+  <input type ='text' name='name' placeholder='username' value="<%= album_users%>" />
+  <input type= 'submit' value='Share' />
+</form>
+<form action= '/delete/<%= album.id %>' style='display:inline'>
+  <input type= 'submit' value='Delete' />
+</form>
 <% end %>
 
 <form action="/new_album" method='POST'>

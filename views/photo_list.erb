@@ -1,13 +1,13 @@
 <h1><%= @album.name %> Album</h1>
 <% @all_photos.each do |photo| %>
-  <img src = '<%= photo.picture %>' />
-  <%= 'The story about this picture:'%>
-  <%= photo.description %>
-  <%= 'This photo is taken on:'%>
-  <%= photo.date %>
-  <form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
-    <input type= 'submit' value='Delete'/>
-  </form>
+<img src = '<%= photo.picture %>' />
+<%= 'The story about this picture:'%>
+<%= photo.description %>
+<%= 'This photo is taken on:'%>
+<%= photo.date %>
+<form action='/<%= @album.id %>/delete/<%= photo.id %>' style='display:inline'>
+  <input type= 'submit' value='Delete'/>
+</form>
 <% end %>
 
 <form action= '/<%= @album.id %>/new_photo' method='POST'>
