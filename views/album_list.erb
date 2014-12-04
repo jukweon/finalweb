@@ -1,65 +1,24 @@
-<ul class="list-album">
-  <% @user.albums.where(active:true).each do |g| %>
-<li class="list-album-item album">
-  <h3 class="list-album-item-heading"><%= g.name %></h4>
-    <form id="new-member-form" class="form-horizontal" method="POST" action="/new_album_member?id=<%= g.id %>">
-      <fieldset>
-        <div class="form-group">
-          <div class="col-lg-10">
-            <!--
-            ################################################
-            List Group Members in an input field, add new member form
-            ################################################
-          -->
-          <% if g.users.size > 1%>
-          <% album_users = ''%>
-          <% g.users.each do |u| %>
-          <% album_users << u.name + ', '%>
-          <% end %>
-          <input type="text" class="form-control input" id="inputName" value="<%= album_users%>" name="names" required>
-          <% else %>
-          <input type="text" class="form-control input" id="inputName" placeholder="Enter Names Separated By Commas" name="names" required>
-          <%end%>
-        </div>
-      </div>
-    </fieldset>
+<h1><%= @user.name %>'s Album Lists</h1>
+<% @all_albums.each do |album| %>
+  <%= album.name %>
+  <img src = '<%= album.picture %>' />
+  <%= 'Members:'%>
+  <% album.users.each do |user| %>
+  <%= user.name + ' '%>
+  <% end %>
+  <form action="/new_album_member?id=<%= album.id %>" method="POST">
+    <% album_users = ''%>
+    <strong>Who do you want to share your album with?</strong>
+    <input type ='text' name='name' placeholder='usernames' value="<%= album_users%>" />
+    <input type= 'submit' value='Share' />
   </form>
-  <!--
-  ################################################
-  Group Info *****Initially Hidden
-  ################################################
--->
-<div class="albumInfo">
-
-<a href="delete?type=g&id=<%= g.id %>"><button class="delete-album">Delete</button></a>
-<a href=""><button class="edit-group">Edit</button></a>
-</div>
-</li>
 <% end %>
-<li class="list-album-item new-album">
-  <h4 id="new-album-button" class="list-album-item-heading">Add New Album</h4>
-  <form id="new-album-form" class="form-horizontal" method="POST" action="/new_album">
-    <fieldset>
-      <legend>New Album</legend>
-      <div class="form-album">
-        <label for="inputAlbumName" class="col-lg-2 control-label">Name</label>
-        <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputAlbumName" placeholder="Album Name" name="name" required>
-        </div>
-      </div>
-      <div class="form-album">
-        <label for="inputAlbumMembers" class="col-lg-2 control-label">Members</label>
-        <div class="col-lg-10">
-          <input type="text" class="form-control" id="inputAlbumMembers" placeholder="Album member names, separated by commas" name="names">
-        </div>
-      </div>
-      <div class="form-album">
-        <div class="col-lg-10 col-lg-offset-2">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button class="btn btn-default cancel-user">Cancel</button>
-        </div>
-      </div>
-    </fieldset>
-  </form>
-</li>
-</ul>
+
+<form action="/new_album" method='POST'>
+  <strong>Add a new album:</strong>
+  <input type='text' name='name' placeholder='album name' />
+  <input type='text' name='picture' placeholder='picture URL' />
+  <input type='submit' value='Save'/>
+</form>
+
+<a href="/logout" class="btn btn-default">logout</a>

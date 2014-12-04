@@ -20,22 +20,19 @@ else
   )
 end
 
-#this good :)
 before do
   @user = User.find_by(name: session[:name])
 end
 
-
 get '/' do
   if @user
-    #@all_albums = @user.albums.order(:name)
+    @all_albums = @user.albums.order(:name)
     erb :album_list
-  else #this part is okay
+  else
     erb :login
   end
 end
 
-#this method is good! :)
 post '/login' do
   user = User.find_by(name: params[:name])
   if user.nil?
@@ -66,21 +63,36 @@ post '/new_user' do
   end
 end
 
-get '/delete_user' do
-  @user.destroy
-  redirect '/'
-end
+#get '/delete_user' do
+  #@user.update(active: 'false')
+  ##@user.distroy
+  #redirect '/'
+#end
+
+#get '/delete/:album' do
+  #@album = Album.find(params[:album])
+  ##@user = @album.user
+  #@album.update(active: 'false')
+  #redirect '/'
+#end
+
+#post '/delete' do
+  #if params[:type] == 'g' #deactivate a group
+    #@album = Album.find(params[:id])
+    #@album.update(active: 'false')
+  #elsif params[:type] == 'u' #deactivate a user
+    #@user.update(active: 'false')
+  #end
+  #redirect '/'
+#end
 
 post '/new_album' do
-  @user.albums.create(name: params[:name])
-  unless params['names'].nil?
-    add_members_to_album(params['names'].split(','), Album.last.id)
-  end
+  @user.albums.create(name: params[:name], picture: params[:picture])
   redirect '/'
 end
 
 post '/new_album_member' do
-  add_members_to_album(params['names'].split(','), params['id'])
+  add_member_to_album(params['name'], params['id'])
 end
 
 #get '/delete/:album' do
@@ -90,36 +102,23 @@ end
   #redirect '/'
 #end
 
-get '/delete' do
-    @type = params[:type]
-    @id = params[:id]
-    if @type == 'g'
-      @album = Album.find(@id)
-    end
-    erb :delete
-end
-
-post '/delete' do
-    if params[:type] == 'g' #deactivate a group
-      @album = Album.find(params[:id])
-      @album.update(active: 'false')
-    elsif params[:type] == 'u' #deactivate a user
-      @user.update(active: 'false')
-    end
-    redirect '/'
-end
-
-#####################
-# Helpers
+#get '/delete' do
+    #@type = params[:type]
+    #@id = params[:id]
+    #if @type == 'g'
+      #@album = Album.find(@id)
+    #end
+    #erb :delete
+#end
 
 helpers do
 
-  def add_members_to_album(names, album_id)
+  def add_member_to_album(name, album_id)
 
     album = Album.find(album_id)
 
-    names.each do |e|
-      new_member = User.find_by(name: e.strip)
+    #name.each do |e|
+      new_member = User.find_by(name: name.strip)
 
       if new_member && @user.albums.include?(album) #new_member has an account and user is associated with group
         unless new_member.albums.include?(album)
@@ -130,7 +129,7 @@ helpers do
         @message = "This user does not have an account"
         erb :message_page
       end
-    end
+    #end
     #calculate_balances(group)
     redirect '/'
   end
