@@ -5,6 +5,7 @@ Bundler.require
 
 require './models/Album.rb'
 require './models/User.rb'
+require './models/Photo.rb'
 
 enable :sessions
 
@@ -83,6 +84,24 @@ post '/new_album_member' do
   add_member_to_album(params['name'], params['id'])
 end
 
+get '/:album' do
+  @album = Album.find(params[:album])
+  @all_photos = @album.photos.order(:date)
+  erb :photo_list
+end
+
+post '/:album/new_photo' do
+  @album = Album.find(params[:album])
+  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
+  redirect "/#{params[:album]}"
+end
+
+get '/:album/delete/:photo' do
+  @album = Album.find(params[:album])
+  @photo = Photo.find(params[:photo])
+  @photo.destroy
+  redirect "/#{params[:album]}"
+end
 
 helpers do
 
