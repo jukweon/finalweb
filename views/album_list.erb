@@ -12,6 +12,9 @@
     <input type ='text' name='name' placeholder='usernames' value="<%= album_users%>" />
     <input type= 'submit' value='Share' />
   </form>
+  <form action= '/delete/<%= album.id %>' style='display:inline'>
+    <input type= 'submit' value='Delete' />
+  </form>
 <% end %>
 
 <form action="/new_album" method='POST'>
@@ -22,3 +25,4 @@
 </form>
 
 <a href="/logout" class="btn btn-default">logout</a>
+<a href="/delete_user" class="btn btn-danger">delete my account</a>

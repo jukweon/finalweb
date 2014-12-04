@@ -63,28 +63,16 @@ post '/new_user' do
   end
 end
 
-#get '/delete_user' do
-  #@user.update(active: 'false')
-  ##@user.distroy
-  #redirect '/'
-#end
+get '/delete_user' do
+  @user.destroy
+  redirect '/'
+end
 
-#get '/delete/:album' do
-  #@album = Album.find(params[:album])
-  ##@user = @album.user
-  #@album.update(active: 'false')
-  #redirect '/'
-#end
-
-#post '/delete' do
-  #if params[:type] == 'g' #deactivate a group
-    #@album = Album.find(params[:id])
-    #@album.update(active: 'false')
-  #elsif params[:type] == 'u' #deactivate a user
-    #@user.update(active: 'false')
-  #end
-  #redirect '/'
-#end
+get '/delete/:album' do
+  @album = Album.find(params[:album])
+  @album.destroy
+  redirect '/'
+end
 
 post '/new_album' do
   @user.albums.create(name: params[:name], picture: params[:picture])
@@ -95,21 +83,6 @@ post '/new_album_member' do
   add_member_to_album(params['name'], params['id'])
 end
 
-#get '/delete/:album' do
-  #@album = Album.find(params[:album])
-  ##@user = @album.user
-  #@album.destroy
-  #redirect '/'
-#end
-
-#get '/delete' do
-    #@type = params[:type]
-    #@id = params[:id]
-    #if @type == 'g'
-      #@album = Album.find(@id)
-    #end
-    #erb :delete
-#end
 
 helpers do
 
