@@ -1,5 +1,3 @@
 class Album < ActiveRecord::Base
-  belongs_to :user
-  has_many :photos, dependent: :destroy
-  #has_one :background
+  has_and_belongs_to_many :users
 end

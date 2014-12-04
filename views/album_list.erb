@@ -1,53 +1,65 @@
-<h1><%= @user.name %>'s albums!</h1>
-
-
-<div id="background">
-  <img src="abc.jpg" class="stretch" />
-</div>
-
-<% @all_albums.each do |album| %>
-<p>
-  <form class="form-inline" role="form">
-    <div class="form-group">
-
-      <div class="container1">
-        <a href="/<%= album.id %>"><img src='<%= album.picture %>'></a>
+<ul class="list-album">
+  <% @user.albums.where(active:true).each do |g| %>
+<li class="list-album-item album">
+  <h3 class="list-album-item-heading"><%= g.name %></h4>
+    <form id="new-member-form" class="form-horizontal" method="POST" action="/new_album_member?id=<%= g.id %>">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-lg-10">
+            <!--
+            ################################################
+            List Group Members in an input field, add new member form
+            ################################################
+          -->
+          <% if g.users.size > 1%>
+          <% album_users = ''%>
+          <% g.users.each do |u| %>
+          <% album_users << u.name + ', '%>
+          <% end %>
+          <input type="text" class="form-control input" id="inputName" value="<%= album_users%>" name="names" required>
+          <% else %>
+          <input type="text" class="form-control input" id="inputName" placeholder="Enter Names Separated By Commas" name="names" required>
+          <%end%>
+        </div>
       </div>
-
-      <div class="input-group">
-        <form action= '/share' style='display:inline'>
-          <input class= "col-xs-7"type='text' name='username' placeholder='username' />
-        </form>
-      </div>
-
-      <button type="submit" class="btn btn-success">Share</button>
-      <form action= '/delete/<%= album.id %>' style='display:inline'>
-        <button type= 'submit' class="btn btn-danger">Delete </button>
-      </form>
-    </div>
+    </fieldset>
   </form>
+  <!--
+  ################################################
+  Group Info *****Initially Hidden
+  ################################################
+-->
+<div class="albumInfo">
 
-</p>
-
-<% end %>
-
-<div class="panel">
-  <div class="panel-body">
-    <form class="addphotoform" action="/new_album" method='POST' style='center'>
-      <h4 class="list-group-item-heading">Add a new album:</h4>
-      <div class="form-group">
-        <input class="form-control" type='text' name='name' placeholder='album name' />
-      </div>
-      <div class="form-group">
-        <input class="form-control" type='text' name='picture' placeholder='profile picture' />
-      </div>
-      <button type='submit' class="btn btn-primary">Save</button>
-    </form>
-  </div>
+<a href="delete?type=g&id=<%= g.id %>"><button class="delete-album">Delete</button></a>
+<a href=""><button class="edit-group">Edit</button></a>
 </div>
-
-<p>
-  <a href="/logout" class="btn btn-default">logout</a>
-  <a href="/backgrounda" class="btn btn-success">To change background</a>
-  <a href="/delete_user" class="btn btn-danger">delete my account</a>
-</p>
+</li>
+<% end %>
+<li class="list-album-item new-album">
+  <h4 id="new-album-button" class="list-album-item-heading">Add New Album</h4>
+  <form id="new-album-form" class="form-horizontal" method="POST" action="/new_album">
+    <fieldset>
+      <legend>New Album</legend>
+      <div class="form-album">
+        <label for="inputAlbumName" class="col-lg-2 control-label">Name</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" id="inputAlbumName" placeholder="Album Name" name="name" required>
+        </div>
+      </div>
+      <div class="form-album">
+        <label for="inputAlbumMembers" class="col-lg-2 control-label">Members</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" id="inputAlbumMembers" placeholder="Album member names, separated by commas" name="names">
+        </div>
+      </div>
+      <div class="form-album">
+        <div class="col-lg-10 col-lg-offset-2">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button class="btn btn-default cancel-user">Cancel</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</li>
+</ul>

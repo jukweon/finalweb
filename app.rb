@@ -3,11 +3,12 @@ require 'bundler/setup'
 
 Bundler.require
 
-require './models/Album'
-require './models/User'
-require './models/Photo'
+require './models/Album.rb'
+require './models/User.rb'
 
 enable :sessions
+
+set :session_secret, ENV['SESSION_SECRET']
 
 if ENV['DATABASE_URL']
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
@@ -19,19 +20,22 @@ else
   )
 end
 
+#this good :)
 before do
   @user = User.find_by(name: session[:name])
 end
 
+
 get '/' do
   if @user
-    @all_albums = @user.albums.order(:name)
+    #@all_albums = @user.albums.order(:name)
     erb :album_list
-  else
+  else #this part is okay
     erb :login
   end
 end
 
+#this method is good! :)
 post '/login' do
   user = User.find_by(name: params[:name])
   if user.nil?
@@ -68,60 +72,66 @@ get '/delete_user' do
 end
 
 post '/new_album' do
-  #@user = User.find(params[:user])
-  @user.albums.create(params)
-  redirect '/'
-end
-
-get '/delete/:album' do
-  @album = Album.find(params[:album])
-  #@user = @album.user
-  @album.destroy
-  redirect '/'
-end
-
-post '/share' do
-  user = User.find_by(name: params[:username])
-  if user.nil?
-    @message = "User not found."
-    erb :message_page
-  else
-    @message = "YAY"
-    erb :message_page
+  @user.albums.create(name: params[:name])
+  unless params['names'].nil?
+    add_members_to_album(params['names'].split(','), Album.last.id)
   end
   redirect '/'
 end
 
-get '/:album' do
-  @album = Album.find(params[:album])
-  @all_photos = @album.photos.order(:date)
-  #@background = @album.background
-  erb :photo_list
+post '/new_album_member' do
+  add_members_to_album(params['names'].split(','), params['id'])
 end
 
-
-#get '/:album/upload_background' do
+#get '/delete/:album' do
   #@album = Album.find(params[:album])
-  #erb :upload_background
+  ##@user = @album.user
+  #@album.destroy
+  #redirect '/'
 #end
 
-#post '/:album/upload_background' do
-  #@album = Album.find(params[:album])
-  #@background = Background.find(params[:background])
-  #redirect "/#{params[:album]}"
-#end
-
-post '/:album/new_photo' do
-  @album = Album.find(params[:album])
-  @album.photos.create(picture: params[:picture], description: params[:description], date: params[:date])
-  redirect "/#{params[:album]}"
+get '/delete' do
+    @type = params[:type]
+    @id = params[:id]
+    if @type == 'g'
+      @album = Album.find(@id)
+    end
+    erb :delete
 end
 
-get '/:album/delete/:photo' do
-  @album = Album.find(params[:album])
-  @photo = Photo.find(params[:photo])
-  #@album = @photo.album
-  #@user = @album.user
-  @photo.destroy
-  redirect "/#{params[:album]}"
+post '/delete' do
+    if params[:type] == 'g' #deactivate a group
+      @album = Album.find(params[:id])
+      @album.update(active: 'false')
+    elsif params[:type] == 'u' #deactivate a user
+      @user.update(active: 'false')
+    end
+    redirect '/'
+end
+
+#####################
+# Helpers
+
+helpers do
+
+  def add_members_to_album(names, album_id)
+
+    album = Album.find(album_id)
+
+    names.each do |e|
+      new_member = User.find_by(name: e.strip)
+
+      if new_member && @user.albums.include?(album) #new_member has an account and user is associated with group
+        unless new_member.albums.include?(album)
+          new_member.albums << album #new_member is added to group
+          #Balance.create(user: new_member, group: group)
+        end
+      else #not registered or @user is not associated with given group => send email to join.
+        @message = "This user does not have an account"
+        erb :message_page
+      end
+    end
+    #calculate_balances(group)
+    redirect '/'
+  end
 end
