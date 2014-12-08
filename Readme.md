@@ -16,7 +16,7 @@ Scrapwebbing is a tool for creating photo albums by submitting photo URL, Photos
 1. Clone the repo
 2. Install dependencies with `bundle install`
 3. Create the database with `rake db:create db:migrate` (you will need to have postgres installed)
-4. Run this app with `rackup` or `shotgun`
+4. Run this app with `shotgun`
 
 ## Screenshots
 
