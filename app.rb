@@ -101,47 +101,17 @@ end
 
 post '/:album/new_member' do
   @album = Album.find(params[:album])
-  user = User.find_by(name: params[:name])
-  if user.nil?
-    @message = "User not found."
-    erb :message_page
-  elsif user.albums.include?(@album)
+  member = User.find_by(name: params[:name])
+  if member
+    if member.albums.include?(@album)
     @message = "The user is already in the group."
     erb :message_page
+    else
+      member.albums << @album
+    end
   else
-    user.albums << @album
+    @message = "The user not found"
+    erb :message_page
   end
   redirect '/'
 end
-
-
-
-#HERE
-#post '/new_album_member' do
-  #add_member_to_album(params['name'], params['id'])
-#end
-
-#HERE
-#helpers do
-
-  #def add_member_to_album(name, album_id)
-
-    #album = Album.find(album_id)
-
-    #name.each do |e|
-    #new_member = User.find_by(name: name.strip)
-
-      #if new_member && @user.albums.include?(album) #new_member has an account and user is associated with group
-        #unless new_member.albums.include?(album)
-          #HERE! new_member.albums << album #new_member is added to group
-          #Balance.create(user: new_member, group: group)
-        #end
-      #else #not registered or @user is not associated with given group => send email to join.
-        #@message = "This user does not have an account"
-        #erb :message_page
-      #end
-    #end
-    #calculate_balances(group)
-    #redirect '/'
-  #end
-#end
