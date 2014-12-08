@@ -7,6 +7,10 @@
 <!-- Body -->
 <% @all_photos.each do |photo| %>
 
+<div class='container'>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+
 <table>
   <tr>
     <th><img src = '<%= photo.picture %>'/></th>
@@ -29,9 +33,17 @@
     </tr>
   </table>
 
+</div><!-- .col -->
+</div><!-- .row -->
+</div>
 
   <% end %>
+
   <br />
+
+  <div class='container'>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
 
   <!-- submitting section -->
   <div class="panel">
@@ -56,8 +68,10 @@
         </form>
       </div>
     </div>
-
     <p>
       <a href="/logout" class="btn btn-default">logout</a>
       <a href="/" class="btn btn-danger">Click: Going back to album lists!</a>
     </p>
+  </div><!-- .col -->
+</div><!-- .row -->
+</div>

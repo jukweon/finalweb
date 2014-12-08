@@ -55,8 +55,13 @@ table, th, tr {
   text-align: center;
 }
 
-img {
+.img1 {
   width: 250px;
+  height: auto;
+}
+
+img {
+  width: 500px;
   height: auto;
 }
 

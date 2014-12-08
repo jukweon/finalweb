@@ -1,13 +1,13 @@
 # Scrapwebbing
 
-Scrapwebbing is a tool for creating photo albums, which can be shared between different users. We wanted to share some photos with our parents back in Korea, but did not want to use facebook, which automatically shares photos with all of our friends. Also, we intended to create a family photo album on a webpage in order to overcome the problem of living far away from each other.
-
+Scrapwebbing is a tool for creating photo albums by submitting photo URL, Photos can be shared between different users. We wanted to share some photos with our parents back in Korea, but did not want to use facebook, which automatically shares photos with all of our friends. Also, we intended to create a family photo album on a webpage in order to overcome the problem of living far away from each other.
 
 ## Features
 
 - Secure albums via unique user names and passwords
-- Number of albums as well as photos inside each album has no limit
+- User can upload as many as albums and photos in each album
 - User can change the background of each album
+- User can easily upload image through copying URL
 - Users can share their albums with their friends
 - Used Bootstrap
 
