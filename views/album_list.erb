@@ -6,13 +6,14 @@
 
 <% @all_albums.each do |album| %>
 
+<p>
   <form class="form-inline" role="form">
     <div class="form-group">
       <table id="t1">
         <tr>
           <th>
             <!-- picture -->
-            <a href= '/<%= album.id %>' ><img src = '<%= album.picture %>' class="container1"/></a>
+            <a href= '/<%= album.id %>' ><img src = '<%= album.picture %>'/></a>
           </th>
           <td width="500px" height="50px">
             <!-- share the album with... -->
@@ -57,9 +58,10 @@
       </table>
     </div>
   </form>
-
+</p>
 
 <% end %>
+
 
 <div class="panel">
   <div class="panel-body">
