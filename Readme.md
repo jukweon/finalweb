@@ -6,9 +6,10 @@ Scrapwebbing is a tool for creating photo albums, which can be shared between di
 ## Features
 
 - Secure albums via unique user names and passwords
-- Number of albums as well as photos inside each album has no limit
+- User can upload as many as albums and photos in each album
+- User can easily upload album picture and photos by copying the image location
 - User can change the background of each album
-- Users can share their albums with their friends
+- Users can share individual album with other users
 - Used Bootstrap
 
 
