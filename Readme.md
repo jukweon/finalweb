@@ -20,8 +20,8 @@ Scrapwebbing is a tool for creating photo albums by submitting photo URL, Photos
 
 ## Screenshots
 
-![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/jukweon/finalweb/blob/v0.14.2/public/1.png)
+![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/jukweon/finalweb/blob/v0.16.0/public/1.png)
 
-![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/jukweon/finalweb/blob/v0.14.2/public/2.png)
+![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/jukweon/finalweb/blob/v0.16.0/public/2.png)
 
-![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/jukweon/finalweb/blob/v0.14.2/public/3.png)
+![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/jukweon/finalweb/blob/v0.16.0/public/3.png)
