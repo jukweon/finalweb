@@ -6,12 +6,22 @@
 <% album.users.each do |user| %>
 <%= user.name + ' '%>
 <% end %>
+
+<!--
 <form action="/new_album_member?id=<%= album.id %>" method="POST">
   <% album_users = ''%>
   <strong>Who do you want to share your album with?</strong>
   <input type ='text' name='name' placeholder='username' value="<%= album_users%>" />
   <input type= 'submit' value='Share' />
 </form>
+-->
+
+<form action= "/<%= album.id %>/new_member" method='POST'>
+  <strong>Who do you want to share your album with?</strong>
+  <input type ='text' name='name' placeholder='username' />
+  <input type= 'submit' value='Share' />
+</form>
+
 <form action= '/delete/<%= album.id %>' style='display:inline'>
   <input type= 'submit' value='Delete' />
 </form>

@@ -14,9 +14,8 @@
 ActiveRecord::Schema.define(version: 20141204115047) do
 
   create_table "albums", force: true do |t|
-    t.string  "name"
-    t.string  "picture"
-    t.boolean "active",  default: true
+    t.string "name"
+    t.string "picture"
   end
 
   create_table "albums_users", force: true do |t|
@@ -32,9 +31,8 @@ ActiveRecord::Schema.define(version: 20141204115047) do
   end
 
   create_table "users", force: true do |t|
-    t.string  "name"
-    t.string  "password_digest"
-    t.boolean "active",          default: true
+    t.string "name"
+    t.string "password_digest"
   end
 
 end
