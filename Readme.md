@@ -20,4 +20,8 @@ Scrapwebbing is a tool for creating photo albums, which can be shared between di
 
 ## Screenshots
 
-![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/dkweon/finalweb/blob/master/Desktop/finalweb/public/a.jpg)
+![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/dkweon/finalweb/blob/master/Desktop/finalweb/public/1.png)
+
+![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/dkweon/finalweb/blob/master/Desktop/finalweb/public/2.png)
+
+![screen shot 2014-09-23 at 1 28 18 pm](https://github.com/dkweon/finalweb/blob/master/Desktop/finalweb/public/3.png)
