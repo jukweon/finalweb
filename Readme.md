@@ -1,30 +1,20 @@
-Group album webapp! :)
-http://web-group-album.herokuapp.com/
+# Scrapwebbing
 
-Gradebook
-Gradebook is a tool for managing assignments submitted via a GitHub repo, using tags to differentiate between assignments. The bulk of it was written over the course of about 6 hours, after I got really fed up with trying to use Google Spreadsheets to input grades.
+Scrapwebbing is a tool for creating a group album and sharing photos. We sisters wanted to share some photos with our parents back in Korea, but did not want to use facebook since facebook shares our photos with all of our friends. Also, we wanted to make our family scrapbook which was impossible since we live far away. We found scrawebbing could solve both problems.
 
-Features
 
-Automatic submission tracking via the Github API
-Supports assignment resubmission using version numbers
-Secure private links for students to view their grades
-Secure administrator login via Google OAuth
-Nice admin UI (Bootstrap)
-Use
+## Features
 
-Clone the repo
-Edit config/initializers/admin_users.rb to reflect the admins' google account info.
-Set the GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_CLIENT_ID, and GITHUB_CLIENT_SECRET environment variables with your GitHub and Google API credentials (if you're deploying to heroku, you'll need to set those on the server as well).
-Install dependencies with bundle install
-Create the database with rake db:create db:migrate (you will need to have postgres installed)
-Run this app with rackup or shotgun
-Screenshots
+-Secure private albums for users to view their photos.
+-Each user can create as many albums as he or she wants.
+-Users can change the background of each album.
+-Users can share their albums with their friends.
+-Used Bootstrap
 
-screen shot 2014-09-23 at 1 28 18 pm
 
-screen shot 2014-10-25 at 10 44 24 am
-
-screen shot 2014-09-23 at 12 54 04 pm
-
-screen shot 2014-09-24 at 8 58 33 am
+## Use
+1. Clone the repo
+2. Install dependencies with 'bundle install'
+3. Run this app with shotgun
+or
+Go to http://web-group-album.herokuapp.com/
