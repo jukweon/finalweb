@@ -6,13 +6,11 @@ Scrapwebbing is a tool for creating a group album and sharing photos. We sisters
 ## Features
 
 <br>-Secure private albums for users to view their photos.</br>
-
-
--Secure private albums for users to view their photos.
--Each user can create as many albums as he or she wants.
--Users can change the background of each album.
--Users can share their albums with their friends.
--Used Bootstrap
+<br>-Secure private albums for users to view their photos.</br>
+<br>-Each user can create as many albums as he or she wants.</br>
+<br>-Users can change the background of each album.</br>
+<br>-Users can share their albums with their friends.</br>
+<br>-Used Bootstrap
 
 
 ## Use
