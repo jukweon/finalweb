@@ -1,4 +1,5 @@
 <h1><%= @album.name %> Album</h1>
+<img src= '<%=@album.background %>' class="stretch" />
 <% @all_photos.each do |photo| %>
 <img src = '<%= photo.picture %>' />
 <%= 'The story about this picture:'%>

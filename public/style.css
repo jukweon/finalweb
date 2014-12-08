@@ -1,6 +1,9 @@
 h1 {
   text-align: center;
-  font-family: "Sans-serif", Verdana;
-  font-size: 40px;
-  color: #FFFFFF;
+  color :#000000;
+}
+
+img {
+  max-width: 800px;
+  height: auto;
 }

@@ -99,19 +99,33 @@ get '/:album/delete/:photo' do
   redirect "/#{params[:album]}"
 end
 
-post '/:album/new_member' do
+post '/:album/background' do
   @album = Album.find(params[:album])
+  @album.update(background: params[:background])
+  redirect '/'
+end
+
+get '/:album/already_included' do
+  @message = "The user is already in the group."
+  erb :message_page
+end
+
+get '/:album/not_found' do
+  @message = "The user not found"
+  erb :message_page
+end
+
+post '/:album/new_member' do
+  album = Album.find(params[:album])
   member = User.find_by(name: params[:name])
   if member
-    if member.albums.include?(@album)
-    @message = "The user is already in the group."
-    erb :message_page
+    if member.albums.include?(album)
+      redirect "/#{params[:album]}/already_included"
     else
-      member.albums << @album
+      member.albums << album
+      redirect '/'
     end
   else
-    @message = "The user not found"
-    erb :message_page
+    redirect "/#{params[:album]}/not_found"
   end
-  redirect '/'
 end

@@ -7,19 +7,16 @@
 <%= user.name + ' '%>
 <% end %>
 
-<!--
-<form action="/new_album_member?id=<%= album.id %>" method="POST">
-  <% album_users = ''%>
-  <strong>Who do you want to share your album with?</strong>
-  <input type ='text' name='name' placeholder='username' value="<%= album_users%>" />
-  <input type= 'submit' value='Share' />
-</form>
--->
-
 <form action= "/<%= album.id %>/new_member" method='POST'>
   <strong>Who do you want to share your album with?</strong>
   <input type ='text' name='name' placeholder='username' />
   <input type= 'submit' value='Share' />
+</form>
+
+<form action="/<%= album.id %>/background" method='POST'>
+  <strong>Do you want to change the background for the album?:</strong>
+  <input type='text' name='background' placeholder='background URL' />
+  <input type='submit' value='Save'/>
 </form>
 
 <form action= '/delete/<%= album.id %>' style='display:inline'>
